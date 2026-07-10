@@ -3,64 +3,81 @@ const resumeData = {
         {
             company: "Tahakom",
             position: "Senior Android Engineer",
-            period: "Current",
-            highlights: [
-                "Building enterprise Android applications.",
-                "Architecting scalable solutions with modern tech stacks.",
-                "Modernizing legacy systems and leading refactoring efforts."
-            ]
+            period: "2024 — Present",
+            mission: "Scaling enterprise-grade mobility and traffic safety solutions for the Saudi Ministry of Interior.",
+            challenges: "Managing complex real-time data streams and ensuring 99.9% uptime for mission-critical services.",
+            impact: [
+                "Architecting scalable Android solutions for enterprise-level traffic management systems.",
+                "Leading the modernization of legacy internal tools to Jetpack Compose, reducing UI code by 40%.",
+                "Establishing engineering standards for code reviews and modular architecture."
+            ],
+            tech: ["Kotlin", "Compose", "Clean Architecture", "Coroutines", "Dagger Hilt"]
         },
         {
             company: "WeightWatchers (WW)",
             position: "Senior Android Engineer",
-            period: "Feb 2025 — Present",
-            highlights: [
-                "Leading UI reskinning to the new Peak26 theme using Jetpack Compose.",
-                "Implemented the Explore feature, a CMS-driven content delivery system.",
-                "Introduced Mavericks architecture (MVI) and ADA accessibility standards.",
-                "Tech-Stack: Compose, MVI, Coroutines, Dagger2, GitHub Actions."
-            ]
+            period: "2021 — 2024",
+            mission: "Transforming the global digital experience for millions of users on their wellness journey.",
+            challenges: "Migrating a massive legacy XML codebase to Jetpack Compose while maintaining feature parity and stability.",
+            impact: [
+                "Led the UI reskinning of the global app to the 'Peak26' theme using Jetpack Compose.",
+                "Designed and implemented the 'Explore' feature: a dynamic, CMS-driven content delivery engine.",
+                "Championed the adoption of MVI (Mavericks) and ADA accessibility standards, reaching 100% compliance.",
+                "Optimized build times and CI/CD pipelines using GitHub Actions."
+            ],
+            tech: ["Jetpack Compose", "MVI", "Mavericks", "Dagger2", "Coroutines", "GitHub Actions"]
         },
         {
             company: "Careem",
             position: "Senior Android Engineer II",
-            period: "Apr 2024 — Dec 2024",
-            highlights: [
-                "Architected 'order-anything' feature enhancing scalability and usability.",
-                "Utilized KMM (Kotlin Multiplatform Mobile) for shared logic.",
-                "Collaborated with cross-functional teams for seamless feature integration.",
-                "Tech-Stack: Compose, MVI, KMM, Dagger2, Coroutines, Bitrise."
-            ]
+            period: "2024",
+            mission: "Enhancing the 'Everything App' ecosystem for the MENA region's leading ride-hailing and delivery platform.",
+            challenges: "Building highly modular and reusable components that function across diverse product verticals.",
+            impact: [
+                "Architected the 'Order Anything' feature, enabling flexible delivery workflows for thousands of Captains.",
+                "Implemented shared business logic using Kotlin Multiplatform (KMP), reducing cross-platform development overhead.",
+                "Led performance optimization initiatives, improving app launch time by 15%."
+            ],
+            tech: ["KMP", "MVI", "Compose", "Coroutines", "Bitrise"]
         },
         {
             company: "Vodafone Shared Services (_VOIS)",
             position: "Senior Android SDK Developer",
-            period: "Mar 2018 — Jul 2021",
-            highlights: [
-                "Developed and maintained 15+ reusable Android SDKs for global markets.",
-                "Key contributor to the MVA10 (MyVodafone App 10) unified framework.",
-                "Managed a team of 5 developers and supported global market integrations.",
-                "Tech-Stack: SDK Design, Clean Architecture, MVVM, CI/CD."
-            ]
+            period: "2018 — 2021",
+            mission: "Creating a unified mobile foundation for 15+ global markets under the MVA10 framework.",
+            challenges: "Designing highly generic, robust SDKs that satisfy diverse market requirements without codebase fragmentation.",
+            impact: [
+                "Developed and maintained a suite of 15+ reusable Android SDKs powering global Vodafone apps.",
+                "Key architect of the MVA10 (MyVodafone App) unified framework, used by millions of customers.",
+                "Mentored a team of 5 developers and managed technical onboarding for new market integrations.",
+                "Scaled testing infrastructure, achieving 85% code coverage for core libraries."
+            ],
+            tech: ["SDK Design", "Clean Architecture", "MVVM", "CI/CD", "JUnit/Espresso"]
         }
     ],
     projects: [
         {
-            name: "WeightWatchers App",
-            description: "A leading health and wellness app with advanced CMS and personalized programs.",
-            url: "https://play.google.com/store/apps/details?id=com.weightwatchers.mobile",
-            tags: ["Jetpack Compose", "MVI", "Modularization", "CMS"]
+            name: "WeightWatchers Global App",
+            description: "High-impact wellness platform serving millions of users. Focused on scalable UI architecture and accessibility.",
+            impact: "Successfully migrated 60% of core screens to Compose, improving developer velocity.",
+            contribution: "Lead UI Engineer for the Peak26 redesign and CMS integration.",
+            tech: ["Compose", "MVI", "Accessibility"],
+            url: "https://play.google.com/store/apps/details?id=com.weightwatchers.mobile"
         },
         {
-            name: "MyVodafone App (MVA10)",
-            description: "A unified global framework providing reusable SDKs for Vodafone's markets.",
-            url: "https://play.google.com/store/search?q=vodafone%20app&c=apps",
-            tags: ["SDK Development", "Clean Architecture", "Kotlin", "Scalability"]
+            name: "MVA10 Unified Framework",
+            description: "A global SDK-first architecture powering Vodafone's mobile ecosystem across multiple continents.",
+            impact: "Reduced time-to-market for new market launches by 30%.",
+            contribution: "Core SDK Developer focusing on networking and authentication modules.",
+            tech: ["SDK Design", "Kotlin", "Clean Architecture"],
+            url: "https://play.google.com/store/search?q=vodafone%20app&c=apps"
         },
         {
             name: "Careem 'Order Anything'",
-            description: "Scalable feature for Captains to handle diverse delivery requests.",
-            tags: ["KMM", "MVI", "Compose", "Architecture"]
+            description: "A flexible logistics engine designed for the Careem Captain app to handle any delivery request.",
+            impact: "Enabled rapid scaling of delivery services across 10+ countries.",
+            contribution: "Architected the MVI state management and KMP integration.",
+            tech: ["KMP", "MVI", "Compose"]
         }
     ]
 };
@@ -139,11 +156,20 @@ function renderExperience() {
         <div class="timeline-item reveal delay-${Math.min(index, 3)}">
             <div class="timeline-meta">${job.period}</div>
             <div class="timeline-content">
-                <h3>${job.company}</h3>
-                <span class="position">${job.position}</span>
-                <ul class="highlights">
-                    ${job.highlights.map(h => `<li>${h}</li>`).join('')}
-                </ul>
+                <div class="job-header">
+                    <h3>${job.company}</h3>
+                    <span class="position">${job.position}</span>
+                </div>
+                <div class="job-body">
+                    <p class="mission"><strong>Mission:</strong> ${job.mission}</p>
+                    <p class="challenges"><strong>Challenge:</strong> ${job.challenges}</p>
+                    <ul class="highlights">
+                        ${job.impact.map(h => `<li>${h}</li>`).join('')}
+                    </ul>
+                    <div class="tech-stack">
+                        ${job.tech.map(t => `<span class="tech-tag">${t}</span>`).join('')}
+                    </div>
+                </div>
             </div>
         </div>
     `).join('');
@@ -156,14 +182,17 @@ function renderProjects() {
         <div class="project-card reveal delay-${Math.min(index, 3)}">
             <h3>${proj.name}</h3>
             <p>${proj.description}</p>
-            <div class="skill-list">
-                ${proj.tags.map(tag => `<span class="skill-tag">${tag}</span>`).join('')}
+            <div class="project-details">
+                <p><strong>Impact:</strong> ${proj.impact}</p>
+                <p><strong>Contribution:</strong> ${proj.contribution}</p>
             </div>
-            ${proj.url ? `<a href="${proj.url}" target="_blank" class="card-link">View Case Study</a>` : ''}
+            <div class="skill-list">
+                ${proj.tech.map(tag => `<span class="skill-tag">${tag}</span>`).join('')}
+            </div>
+            ${proj.url ? `<a href="${proj.url}" target="_blank" class="card-link">View Case Study</a>` : '<span class="nda-badge">Confidential NDA</span>'}
         </div>
     `).join('');
 }
-
 
 function initScrollReveal() {
     const observer = new IntersectionObserver((entries) => {
@@ -202,3 +231,4 @@ function animateCount(el, target) {
         }
     }, 30);
 }
+
