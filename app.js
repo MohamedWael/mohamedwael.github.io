@@ -1,32 +1,3 @@
-const translations = {
-    en: {
-        heroTitle: "Building core Android experiences for global giants.",
-        heroSubtitle: "Senior Android Engineer & App Architect specializing in high-impact mobile systems and unified frameworks.",
-        ctaEmail: "Email Me",
-        ctaLinkedin: "LinkedIn",
-        ctaCV: "Download CV",
-        titleExperience: "Professional Experience",
-        titleProjects: "Key Projects",
-        titleSkills: "Technical Mastery",
-        present: "Present",
-        viewProject: "View Project",
-        langBtn: "AR"
-    },
-    ar: {
-        heroTitle: "بناء التجارب الجوهرية لنظام أندرويد لكبرى الشركات العالمية.",
-        heroSubtitle: "مهندس أندرويد أول ومعماري تطبيقات متخصص في الأنظمة المحمولة عالية التأثير والأطر الموحدة.",
-        ctaEmail: "تواصل معي",
-        ctaLinkedin: "لينكد إن",
-        ctaCV: "تحميل السيرة الذاتية",
-        titleExperience: "الخبرة المهنية",
-        titleProjects: "المشاريع الرئيسية",
-        titleSkills: "الإتقان التقني",
-        present: "الحالي",
-        viewProject: "عرض المشروع",
-        langBtn: "EN"
-    }
-};
-
 const resumeData = {
     work: [
         {
@@ -89,7 +60,6 @@ const resumeData = {
 };
 
 // State Management
-let currentLang = 'en';
 let currentTheme = 'light';
 
 // Initialize
@@ -117,29 +87,55 @@ function setupEventListeners() {
         setTheme(currentTheme === 'light' ? 'dark' : 'light');
     });
 
-    document.getElementById('lang-toggle').addEventListener('click', () => {
-        currentLang = currentLang === 'en' ? 'ar' : 'en';
-        document.documentElement.setAttribute('lang', currentLang);
-        renderContent();
+    // Contact Form Handling
+    const contactForm = document.getElementById('contact-form');
+    const formStatus = document.getElementById('form-status');
+
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(contactForm);
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const message = formData.get('message');
+
+        formStatus.textContent = 'Sending...';
+        formStatus.className = 'form-status';
+
+        // Using Formspree (a free service for static sites) to handle email sending.
+        // Replace 'YOUR_FORMSPREE_ID' with your real ID from formspree.io
+        try {
+            const response = await fetch('https://formspree.io/f/mqakaknr', {
+                method: 'POST',
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    message: message,
+                    _subject: `New Portfolio Message from ${name}`
+                }),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                formStatus.textContent = 'Message sent successfully!';
+                formStatus.classList.add('success');
+                contactForm.reset();
+            } else {
+                formStatus.textContent = 'Oops! There was a problem sending your message.';
+                formStatus.classList.add('error');
+            }
+        } catch (error) {
+            formStatus.textContent = 'Oops! There was a problem sending your message.';
+            formStatus.classList.add('error');
+        }
     });
 }
 
 function renderContent() {
-    const t = translations[currentLang];
-
-    // Update Static Text
-    document.getElementById('lang-toggle').textContent = t.langBtn;
-    document.getElementById('hero-title').textContent = t.heroTitle;
-    document.getElementById('hero-subtitle').textContent = t.heroSubtitle;
-    document.getElementById('cta-email').textContent = t.ctaEmail;
-    document.getElementById('cta-linkedin').textContent = t.ctaLinkedin;
-    document.getElementById('cta-cv').textContent = t.ctaCV;
-    document.getElementById('cta-cv').href = "Mohamed_Wael_CV.pdf"; // Point to a local copy
-    document.getElementById('title-experience').textContent = t.titleExperience;
-    document.getElementById('title-projects').textContent = t.titleProjects;
-    document.getElementById('title-skills').textContent = t.titleSkills;
-
-    // Render Lists
+    document.getElementById('cta-cv').href = "Mohamed_Wael_CV.pdf";
     renderExperience();
     renderProjects();
     renderSkills();
@@ -170,7 +166,7 @@ function renderProjects() {
             <div class="skill-list" style="margin-bottom: 1.5rem">
                 ${proj.tags.map(tag => `<span class="skill-tag">${tag}</span>`).join('')}
             </div>
-            <a href="${proj.url}" target="_blank" class="card-link">${translations[currentLang].viewProject} ↗</a>
+            <a href="${proj.url}" target="_blank" class="card-link">View Project ↗</a>
         </div>
     `).join('');
 }
@@ -189,13 +185,16 @@ function renderSkills() {
 
 function initScrollReveal() {
     const observerOptions = {
-        threshold: 0.1
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
+                // Once it's active, we can unobserve if we want it to stay revealed
+                // observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
