@@ -1,13 +1,24 @@
 const resumeData = {
     work: [
         {
+            company: "Tahakom",
+            position: "Senior Android Engineer",
+            period: "Current",
+            highlights: [
+                "Building enterprise Android applications.",
+                "Architecting scalable solutions with modern tech stacks.",
+                "Modernizing legacy systems and leading refactoring efforts."
+            ]
+        },
+        {
             company: "WeightWatchers (WW)",
             position: "Senior Android Engineer",
             period: "Feb 2025 — Present",
             highlights: [
                 "Leading UI reskinning to the new Peak26 theme using Jetpack Compose.",
                 "Implemented the Explore feature, a CMS-driven content delivery system.",
-                "Architecture: MVI (Mavericks), Clean Architecture, Structured Concurrency."
+                "Introduced Mavericks architecture (MVI) and ADA accessibility standards.",
+                "Tech-Stack: Compose, MVI, Coroutines, Dagger2, GitHub Actions."
             ]
         },
         {
@@ -15,9 +26,10 @@ const resumeData = {
             position: "Senior Android Engineer II",
             period: "Apr 2024 — Dec 2024",
             highlights: [
-                "Architected the 'order-anything' feature for the Captain application.",
-                "Leveraged KMM (Kotlin Multiplatform Mobile) and MVI architecture.",
-                "Collaborated on modularization and performance optimization."
+                "Architected 'order-anything' feature enhancing scalability and usability.",
+                "Utilized KMM (Kotlin Multiplatform Mobile) for shared logic.",
+                "Collaborated with cross-functional teams for seamless feature integration.",
+                "Tech-Stack: Compose, MVI, KMM, Dagger2, Coroutines, Bitrise."
             ]
         },
         {
@@ -25,17 +37,10 @@ const resumeData = {
             position: "Senior Android SDK Developer",
             period: "Mar 2018 — Jul 2021",
             highlights: [
-                "Developed 15+ reusable Android SDKs for global Vodafone markets.",
-                "Key contributor to the MVA10 (MyVodafone App 10) framework.",
-                "Managed a team of 5 developers for high-quality SDK delivery."
-            ]
-        },
-        {
-            company: "Algorithmz",
-            position: "Android Developer",
-            period: "Dec 2016 — Mar 2018",
-            highlights: [
-                "Designed and developed an IPTV application compatible with Android TVs, Google Chromecast, Amazon Fire, and mobile devices."
+                "Developed and maintained 15+ reusable Android SDKs for global markets.",
+                "Key contributor to the MVA10 (MyVodafone App 10) unified framework.",
+                "Managed a team of 5 developers and supported global market integrations.",
+                "Tech-Stack: SDK Design, Clean Architecture, MVVM, CI/CD."
             ]
         }
     ],
@@ -44,36 +49,24 @@ const resumeData = {
             name: "WeightWatchers App",
             description: "A leading health and wellness app with advanced CMS and personalized programs.",
             url: "https://play.google.com/store/apps/details?id=com.weightwatchers.mobile",
-            tags: ["Jetpack Compose", "MVI", "Modularization"]
+            tags: ["Jetpack Compose", "MVI", "Modularization", "CMS"]
         },
         {
             name: "MyVodafone App (MVA10)",
             description: "A unified global framework providing reusable SDKs for Vodafone's markets.",
             url: "https://play.google.com/store/search?q=vodafone%20app&c=apps",
-            tags: ["SDK Development", "Clean Architecture", "Kotlin"]
+            tags: ["SDK Development", "Clean Architecture", "Kotlin", "Scalability"]
         },
         {
-            name: "Tooli TV",
-            description: "Interactive IPTV app for Android TV, Fire TV, and mobile devices.",
-            url: "https://play.google.com/store/apps/details?id=com.sacaps.toolitv",
-            tags: ["Android TV", "Streaming", "WebSockets"]
-        },
-        {
-            name: "AsyncChat SDK",
-            description: "Asynchronous messaging component enabling reliable communication via web sockets.",
-            tags: ["WebSockets", "SDK Development", "Real-time"]
+            name: "Careem 'Order Anything'",
+            description: "Scalable feature for Captains to handle diverse delivery requests.",
+            tags: ["KMM", "MVI", "Compose", "Architecture"]
         }
-    ],
-    skills: [
-        { category: "Languages", items: ["Kotlin", "Java", "TypeScript", "JavaScript"] },
-        { category: "Mobile", items: ["Jetpack Compose", "KMM", "Custom Views", "Animations"] },
-        { category: "Architecture", items: ["MVI (Mavericks)", "MVVM", "Clean Architecture", "Dagger/Hilt"] },
-        { category: "Infrastructure", items: ["GitHub Actions", "Bitrise", "Gradle Automation", "CI/CD"] }
     ]
 };
 
 // State Management
-let currentTheme = 'light';
+let currentTheme = 'dark';
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
@@ -81,11 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
     renderContent();
     setupEventListeners();
     initScrollReveal();
+    initStatsCounter();
     document.getElementById('year').textContent = new Date().getFullYear();
 });
 
 function initTheme() {
-    const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const savedTheme = localStorage.getItem('theme') || 'dark';
     setTheme(savedTheme);
 }
 
@@ -100,35 +94,21 @@ function setupEventListeners() {
         setTheme(currentTheme === 'light' ? 'dark' : 'light');
     });
 
-    // Contact Form Handling
     const contactForm = document.getElementById('contact-form');
     const formStatus = document.getElementById('form-status');
 
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-
             const formData = new FormData(contactForm);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const message = formData.get('message');
-
             formStatus.textContent = 'Sending...';
             formStatus.className = 'form-status';
 
             try {
                 const response = await fetch('https://formspree.io/f/mqakaknr', {
                     method: 'POST',
-                    body: JSON.stringify({
-                        name: name,
-                        email: email,
-                        message: message,
-                        _subject: `New Portfolio Message from ${name}`
-                    }),
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    }
+                    body: JSON.stringify(Object.fromEntries(formData)),
+                    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
                 });
 
                 if (response.ok) {
@@ -136,11 +116,11 @@ function setupEventListeners() {
                     formStatus.classList.add('success');
                     contactForm.reset();
                 } else {
-                    formStatus.textContent = 'Oops! There was a problem sending your message.';
+                    formStatus.textContent = 'Problem sending message.';
                     formStatus.classList.add('error');
                 }
             } catch (error) {
-                formStatus.textContent = 'Oops! There was a problem sending your message.';
+                formStatus.textContent = 'Error sending message.';
                 formStatus.classList.add('error');
             }
         });
@@ -150,7 +130,6 @@ function setupEventListeners() {
 function renderContent() {
     renderExperience();
     renderProjects();
-    renderSkills();
 }
 
 function renderExperience() {
@@ -178,39 +157,47 @@ function renderProjects() {
             <h3>${proj.name}</h3>
             <p>${proj.description}</p>
             <div class="skill-list" style="margin-bottom: 1.5rem">
-                ${proj.tags.map(tag => `<span class="skill-tag">${tag}</span>`).join('')}
+                ${proj.tags.map(tag => `<span class="skill-tag" style="background:var(--bg); border:1px solid var(--border); padding:2px 8px; border-radius:4px; font-size:0.8rem; margin-right:4px;">${tag}</span>`).join('')}
             </div>
             ${proj.url ? `<a href="${proj.url}" target="_blank" class="card-link">View Project ↗</a>` : ''}
         </div>
     `).join('');
 }
 
-function renderSkills() {
-    const container = document.getElementById('skills-container');
-    if (!container) return;
-    container.innerHTML = resumeData.skills.map(cat => `
-        <div class="skill-category reveal">
-            <h4>${cat.category}</h4>
-            <div class="skill-list">
-                ${cat.items.map(item => `<span class="skill-tag">${item}</span>`).join('')}
-            </div>
-        </div>
-    `).join('');
-}
-
 function initScrollReveal() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
             }
         });
-    }, observerOptions);
-
+    }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
+
+function initStatsCounter() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = parseInt(entry.target.getAttribute('data-target'));
+                animateCount(entry.target, target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.stat-number').forEach(el => observer.observe(el));
+}
+
+function animateCount(el, target) {
+    let current = 0;
+    const increment = target / 50;
+    const interval = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            el.textContent = target;
+            clearInterval(interval);
+        } else {
+            el.textContent = Math.floor(current);
+        }
+    }, 30);
 }
