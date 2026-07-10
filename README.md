@@ -1,52 +1,54 @@
-# Mohamed Wael Abdelsattar
-### Senior Android Engineer
+# Mohamed Wael | Portfolio Website
 
-I am a results-oriented Senior Android Engineer with over 8 years of experience in building scalable, high-performance mobile applications and SDKs. My expertise lies in architecting robust systems using modern Android technologies like Jetpack Compose, Kotlin Coroutines, and MVI/MVVM architectures.
+This repository contains the source code for my professional portfolio website, showcasing my work as a Senior Android Engineer. 
 
----
+The site is designed with a **Precision Minimal** aesthetic, communicating "Expert Confidence" through clean hierarchy, intentional whitespace, and refined typography.
 
-### 🚀 Technical Skills
-
-*   **Languages:** Kotlin, Java, JavaScript, TypeScript
-*   **Android Development:** Jetpack Compose, Android Architecture Components, KMM (Kotlin Multiplatform Mobile), Custom Views, Animations.
-*   **Architecture:** MVI (Mavericks), MVVM, Clean Architecture, Dependency Injection (Dagger, Hilt).
-*   **Networking & Persistence:** Retrofit, Ktor, WebSockets (CometD), Room, Realm, Firestore.
-*   **Testing:** Unit Testing (JUnit, Mockito, MockK), UI Testing (Espresso).
-*   **Tools:** GitHub Actions, Bitrise, Jenkins, Gradle, Cursor/Antigravity.
+**Live Site:** [mohamedwael.github.io](https://mohamedwael.github.io)
 
 ---
 
-### 💼 Professional Experience
+## 🛠 Tech Stack
 
-#### **Senior Android Engineer | WeightWatchers (WW)**  
-*Feb 2025 – Present (Contract)*
-*   Leading the UI reskinning to the new **peak26 theme** using Jetpack Compose.
-*   Implemented the **Explore feature** (CMS-driven content delivery).
+- **Frontend:** HTML5, CSS3 (using OKLCH color space), Vanilla JavaScript.
+- **Typography:** Inter for headings/body, JetBrains Mono for technical accents.
+- **Icons:** Custom SVG icons.
+- **Deployment:** GitHub Actions & GitHub Pages.
 
-#### **Senior Mobile Engineer II | Careem**  
-*Apr 2024 – Dec 2024 (Contract)*
-*   Architected and implemented a new experience for the **'order-anything'** feature in the Captain application.
-*   Utilized **KMM** and **MVI** with Clean Architecture.
+## ✨ Key Features
 
-#### **Senior Android SDK Developer | Vodafone Shared Services (_VOIS)**  
-*Mar 2018 – July 2021*
-*   Developed and maintained 15+ reusable Android SDKs for global markets.
-*   Key contributor to the **MVA10 (MyVodafone App 10)** framework.
+- **Dark Mode Support:** Seamless transition between light and dark themes based on system preferences or manual toggle.
+- **Responsive Design:** Optimized for all screen sizes from mobile to desktop.
+- **Performance Focused:** Minimal dependencies, optimized assets, and clean code for fast loading.
+- **Accessibility:** Semantic HTML, high contrast ratios, and keyboard navigation support.
+- **Micro-interactions:** Subtle animations and systematic reveals for a modern feel.
 
----
+## 🚀 Deployment
 
-### 🛠️ Key Projects
+The site is automatically deployed to GitHub Pages via GitHub Actions whenever changes are pushed to the `main` branch.
 
-*   **WeightWatchers App:** A top-ranked health and wellness app.
-*   **MyVodafone App (MVA10):** A unified global framework for Vodafone.
-*   **Tooli TV:** IPTV application for Android TV and Fire TV.
-*   **AsyncChat SDK:** Reliable WebSocket-based messaging component.
+To run locally:
+1. Clone the repository.
+2. Open `index.html` in your browser (or use a local live server).
 
 ---
 
-### 📫 Let's Connect
+## 👨‍💻 About the Developer
 
-*   **LinkedIn:** [linkedin.com/in/mohamedwael](https://www.linkedin.com/in/mohamedwael/)
-*   **Email:** IMohamedWael@Outlook.com
-*   **GitHub:** [github.com/MohamedWael](https://github.com/MohamedWael)
-*   **Location:** Cairo, Egypt
+**Mohamed Wael Abdelsattar**  
+*Senior Android Engineer*
+
+I am a results-oriented Senior Android Engineer with over 9 years of experience in building scalable, high-performance mobile applications and SDKs. My expertise lies in architecting robust systems using modern Android technologies like Jetpack Compose, Kotlin Coroutines, and MVI/MVVM architectures.
+
+### Quick Stats
+- **9+** Years Experience
+- **6** Global Companies (Careem, WeightWatchers, Vodafone, etc.)
+- **15+** Android SDKs Built
+- **Millions** of End Users reached
+
+---
+
+### 📫 Contact
+
+- **LinkedIn:** [linkedin.com/in/mohamedwael](https://www.linkedin.com/in/mohamedwael/)
+- **GitHub:** [github.com/MohamedWael](https://github.com/MohamedWael)
