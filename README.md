@@ -11,7 +11,7 @@ The site is designed with a **Precision Minimal** aesthetic, communicating "Expe
 ## 🛠 Tech Stack
 
 - **Frontend:** HTML5, CSS3 (using OKLCH color space), Vanilla JavaScript.
-- **Typography:** Inter for headings/body, JetBrains Mono for technical accents.
+- **Typography:** Geist Sans for headings/body, Geist Mono for technical accents.
 - **Icons:** Custom SVG icons.
 - **Deployment:** GitHub Actions & GitHub Pages.
 

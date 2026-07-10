@@ -135,8 +135,8 @@ function renderContent() {
 function renderExperience() {
     const container = document.getElementById('experience-list');
     if (!container) return;
-    container.innerHTML = resumeData.work.map(job => `
-        <div class="timeline-item reveal">
+    container.innerHTML = resumeData.work.map((job, index) => `
+        <div class="timeline-item reveal delay-${Math.min(index, 3)}">
             <div class="timeline-meta">${job.period}</div>
             <div class="timeline-content">
                 <h3>${job.company}</h3>
@@ -152,17 +152,18 @@ function renderExperience() {
 function renderProjects() {
     const container = document.getElementById('projects-grid');
     if (!container) return;
-    container.innerHTML = resumeData.projects.map(proj => `
-        <div class="card reveal">
+    container.innerHTML = resumeData.projects.map((proj, index) => `
+        <div class="project-card reveal delay-${Math.min(index, 3)}">
             <h3>${proj.name}</h3>
             <p>${proj.description}</p>
-            <div class="skill-list" style="margin-bottom: 1.5rem">
-                ${proj.tags.map(tag => `<span class="skill-tag" style="background:var(--bg); border:1px solid var(--border); padding:2px 8px; border-radius:4px; font-size:0.8rem; margin-right:4px;">${tag}</span>`).join('')}
+            <div class="skill-list">
+                ${proj.tags.map(tag => `<span class="skill-tag">${tag}</span>`).join('')}
             </div>
-            ${proj.url ? `<a href="${proj.url}" target="_blank" class="card-link">View Project ↗</a>` : ''}
+            ${proj.url ? `<a href="${proj.url}" target="_blank" class="card-link">View Case Study</a>` : ''}
         </div>
     `).join('');
 }
+
 
 function initScrollReveal() {
     const observer = new IntersectionObserver((entries) => {
