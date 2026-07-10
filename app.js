@@ -122,22 +122,28 @@ function setupEventListeners() {
             formStatus.className = 'form-status';
 
             try {
-                const response = await fetch('https://formspree.io/f/mqakaknr', {
+                const response = await fetch('https://formspree.io/f/mrewnoan', {
                     method: 'POST',
                     body: JSON.stringify(Object.fromEntries(formData)),
                     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
                 });
+
+                const data = await response.json();
 
                 if (response.ok) {
                     formStatus.textContent = 'Message sent successfully!';
                     formStatus.classList.add('success');
                     contactForm.reset();
                 } else {
-                    formStatus.textContent = 'Problem sending message.';
+                    if (Object.hasOwn(data, 'errors')) {
+                        formStatus.textContent = data['errors'].map(error => error.message).join(", ");
+                    } else {
+                        formStatus.textContent = 'Problem sending message. Please check your Formspree configuration.';
+                    }
                     formStatus.classList.add('error');
                 }
             } catch (error) {
-                formStatus.textContent = 'Error sending message.';
+                formStatus.textContent = 'Network error. Please try again later.';
                 formStatus.classList.add('error');
             }
         });
