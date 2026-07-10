@@ -105,7 +105,7 @@ function setupEventListeners() {
         // Using Formspree (a free service for static sites) to handle email sending.
         // Replace 'YOUR_FORMSPREE_ID' with your real ID from formspree.io
         try {
-            const response = await fetch('https://formspree.io/f/mqakaknr', {
+            const response = await fetch('https://formspree.io/f/mrewnoan', {
                 method: 'POST',
                 body: JSON.stringify({
                     name: name,
