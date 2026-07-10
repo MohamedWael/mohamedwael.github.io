@@ -85,6 +85,13 @@ const resumeData = {
 // State Management
 let currentTheme = 'dark';
 
+// Analytics Helper
+function trackEvent(eventName, params = {}) {
+    if (typeof gtag === 'function') {
+        gtag('event', eventName, params);
+    }
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
@@ -108,7 +115,9 @@ function setTheme(theme) {
 
 function setupEventListeners() {
     document.getElementById('theme-toggle').addEventListener('click', () => {
-        setTheme(currentTheme === 'light' ? 'dark' : 'light');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+        trackEvent('theme_toggle', { theme: newTheme });
     });
 
     const contactForm = document.getElementById('contact-form');
@@ -134,7 +143,9 @@ function setupEventListeners() {
                     formStatus.textContent = 'Message sent successfully!';
                     formStatus.classList.add('success');
                     contactForm.reset();
+                    trackEvent('contact_form_success');
                 } else {
+                    trackEvent('contact_form_error', { error: data['errors'] ? 'validation' : 'api' });
                     if (Object.hasOwn(data, 'errors')) {
                         formStatus.textContent = data['errors'].map(error => error.message).join(", ");
                     } else {
@@ -148,6 +159,17 @@ function setupEventListeners() {
             }
         });
     }
+
+    // Track external link clicks
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (link && link.hostname && link.hostname !== window.location.hostname) {
+            trackEvent('external_link_click', {
+                link_url: link.href,
+                link_text: link.textContent.trim()
+            });
+        }
+    });
 }
 
 function renderContent() {
